@@ -1,0 +1,7 @@
+<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
+  <label for="{{data.name}}" class="">{{data.caption}}</label>
+  <textarea [formControlName]="data.name" class="form-control" id="{{data.name}}" required (keyup)="onInputChange($event)"></textarea>
+</div>
+<pre>
+    {{data.value | json}}
+</pre>

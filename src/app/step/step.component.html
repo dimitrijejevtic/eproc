@@ -1,0 +1,15 @@
+<div *ngIf="step | async as step">
+<nav class="navbar sticky-top navbar-dark bg-dark">
+  <span class="navbar-text">{{step.name}}</span>
+  <div class="w-auto"></div>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <button type="button" class="btn btn-default m-1" [disabled]="!isValid">Validate</button>
+      <button type="button" class="btn btn-success m-1" [disabled]="!isSavable">Save</button>
+    </li>
+  </ul>
+</nav>
+<div class="px-4 pt-3">
+  <app-form [step]="step" ></app-form>
+</div>
+</div>

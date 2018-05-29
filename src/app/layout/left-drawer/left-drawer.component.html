@@ -1,0 +1,10 @@
+<li class="nav-item">
+  <a href="" routerLink="/" class="nav-link">123</a>
+</li>
+<li class="nav-item" *ngFor="let step of steps | async">
+
+  <a href="" routerLink="/step/{{step.id}}" class="nav-link">
+    {{step.name}}
+  </a>
+</li>
+

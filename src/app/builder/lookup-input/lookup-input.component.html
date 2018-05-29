@@ -1,0 +1,16 @@
+<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
+  <label for="{{data.name}}" class="">
+    {{data.caption}}
+  </label>
+
+  <ng-select [items]="data.options | async" bindLabel="name" bindValue="id" formControlName="{{data.name}}" id="{{data.name}}"
+    (change)="onInputChange($event)" [loading]="loading" [markFirst]="false" labelForId="{{data.name}}" ></ng-select>
+
+  <!-- <small [hidden]="formcontr.valid || input.pristine" class="text-danger">{{data.name}} is bad!</small>
+     -->
+</div>
+
+<pre>{{data.value | json}}
+
+  </pre>
+

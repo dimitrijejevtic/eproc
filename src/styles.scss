@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
+@import "../node_modules/open-iconic/font/css/open-iconic-bootstrap.css";
+
+.sidebar{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  z-index: 100;
+  padding:48px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0,0,0,0.1);
+}
+.ng-valid[required]:not(ng-select), .ng-valid.required:not(ng-select){
+  border-left:5px solid green;
+}
+.ng-invalid:not(form):not(div):not(ng-select):not(dl-date-time-picker):not(.ng-pristine){
+  border-left: 5px solid red;
+}
+ng-select.ng-invalid.ng-touched:not(.ng-pristine) .ng-select-container {
+  border-left:5px solid red;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+}
+ng-select.ng-valid[required] .ng-select-container, ng-select.ng-valid.required .ng-select-container{
+  border-left:5px solid green;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
+}
+.modal { overflow: auto !important; }

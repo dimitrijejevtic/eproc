@@ -1,0 +1,24 @@
+<!-- "$event.target.parentNode.classList.remove('show')" -->
+<app-form-alert *ngIf="saving" [alertMessage]="alertMessage"></app-form-alert>
+<form (ngSubmit)="onSubmit()" #stepForm="ngForm" [formGroup]="form">
+  <fieldset>
+    <div *ngIf="step!==null">
+      <div class="form-section" *ngFor="let section of step.sections">
+        <app-section [section]="section" [form]="form"></app-section>
+      </div>
+    </div>
+    <div *ngIf="step === null">
+      <div class="form-section" *ngFor="let section of instance.sections">
+        <app-section [section]="section" [form]="form"></app-section>
+      </div>
+    </div>
+  </fieldset>
+  <div *ngIf="!isInner">
+    <button type="submit" class="btn btn-success" [disabled]="!stepForm.form.valid">Submit</button>
+    <button type="button" class="btn btn-default">Validate</button>
+    <button type="button" class="btn btn-default" (click)="saveInstance()">Test save</button>
+  </div>
+</form>
+<pre class="alert alert-dark">{{form.getRawValue() | json}}
+  {{instance.getValue() | json}}</pre>
+

@@ -1,0 +1,16 @@
+
+<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
+  <label for="{{data.name}}" class="">
+    {{data.caption}}
+  </label>
+  <input type="{{data.toHtmlType()}}" class="form-control" id="{{data.name}}"
+  required  placeholder="{{data.name}}"
+  [step]="data.getStep()"
+  [pattern]="data.expressionValidation"
+  [formControlName]="data.name" (keyup)="onInputChange($event)">
+  <!-- <small [hidden]="formcontr.valid || input.pristine" class="text-danger">{{data.name}} is bad!</small>
+   --></div>
+
+<pre>{{data.value | json}}
+
+</pre>

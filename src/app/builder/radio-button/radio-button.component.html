@@ -1,0 +1,16 @@
+<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
+  <div class="form-check">
+    <label for="{{data.name+'_true'}}" class="form-check-label">
+      <input [formControlName]="data.name" type="radio" class="form-check-input"
+      name="{{data.name}}" id="{{data.name+'_true'}}" value="true" > Yes
+    </label>
+    </div>
+    <div class="form-check">
+    <label for="{{data.name+'_false'}}" class="form-check-label">
+      <input [formControlName]="data.name" type="radio" class="form-check-input"
+      name="{{data.name}}" id="{{data.name+'_false'}}" value="false" > No
+    </label>
+  </div>
+</div>
+<pre>{{data.value | json}}</pre>
+
