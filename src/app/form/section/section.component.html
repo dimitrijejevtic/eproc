@@ -1,8 +1,11 @@
-<div class="form-section card">
-  <span class="card-header card-header card-title">{{section.name}}</span>
-  <div class="card-body">
+<div class="form-section panel panel-default">
+  <div class="panel-heading">{{section.CaptionKey}}</div>
+  <div class="panel-body">
     <ng-template stepContentTarget>
-
     </ng-template>
+    <div *ngIf="section.ControlName=='SubWizardCall'" >
+        <span>SubWizardCall</span>
+    </div>
   </div>
-  </div>
+</div>
+

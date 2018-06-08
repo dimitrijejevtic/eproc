@@ -1,0 +1,14 @@
+#form-wrapper{
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 34px;
+}
+#sticky-nav{
+  background-color:rgb(39, 39, 39);
+}
+.m-1{
+  margin:4px;
+}
+.navbar-text{
+  color:white;
+}

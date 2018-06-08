@@ -1,0 +1,21 @@
+.link-text{
+  text-overflow: ellipsis;
+  font-size: 12pt;
+  text-decoration: none;
+  color:lightgray;
+  word-break: break-all;
+}
+.nav-item{
+  padding-left: 18px;
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-right: 4px;
+}
+.nav-item:hover{
+  background-color: gray;
+}
+a.disabled{
+  color: darkslategray;
+  cursor: not-allowed;
+  text-decoration: underline;
+}

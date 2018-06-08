@@ -20,6 +20,6 @@ export class RadioButtonComponent implements OnInit, OnDestroy, BuilderComponent
   ngOnDestroy(): void {
   }
   onInputChange(event) {
-    this.data.value = this.form.get(this.data.name).value;
+    this.data.Value = this.form.get(this.data.DictionaryAttributeParent.Name).value;
   }
 }

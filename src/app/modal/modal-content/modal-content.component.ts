@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ObjectInstance } from '../../m-models/object-instance';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'modal-content',
@@ -9,9 +9,9 @@ import { ObjectInstance } from '../../m-models/object-instance';
 })
 export class ModalContentComponent implements OnInit, OnDestroy {
 
-
+  passtrough: any;
   instance: ObjectInstance;
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: BsModalRef) { }
 
   ngOnInit() {
   }
@@ -19,6 +19,10 @@ export class ModalContentComponent implements OnInit, OnDestroy {
   }
   returningInstance(event) {
     this.instance = event.value;
+  }
+  closeModal(param: any) {
+    console.log('closemodal');
+    this.activeModal.hide();
   }
 
 }

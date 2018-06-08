@@ -18,4 +18,13 @@ export class UrlResolver<T extends TypeNamed> {
     url = url.concat(Constants.rootUrl, Constants.apiUrl, this.typename, Constants.parameterStart, JSON.stringify(params));
     return url;
   }
+  public getCommandUrl(command: string) {
+    const url = ''.concat(Constants.rootUrl, Constants.apiUrl, 'command/', command);
+    return url;
+  }
+  getQueryUrl(command: string) {
+    const url = ''.concat(Constants.rootUrl, Constants.apiUrl, 'query/', command);
+    return url;
+  }
 }
+

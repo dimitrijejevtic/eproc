@@ -1,16 +1,17 @@
-<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
-  <label for="{{data.name}}" class="">
-    {{data.caption}}
+<div class="form-group"  [formGroup]="form">
+  <label for="{{data.DictionaryAttributeParent.Name}}" class="">
+    {{data.DictionaryAttributeParent.CaptionKey}}
   </label>
 
-  <ng-select [items]="data.options | async" bindLabel="name" bindValue="id" formControlName="{{data.name}}" id="{{data.name}}"
-    (change)="onInputChange($event)" [loading]="loading" [markFirst]="false" labelForId="{{data.name}}" ></ng-select>
+  <ng-select [items]="data.Options | async" bindLabel="name" bindValue="id" formControlName="{{data.DictionaryAttributeParent.Name}}" id="{{data.DictionaryAttributeParent.Name}}"
+    (change)="onInputChange($event)" [loading]="loading" [markFirst]="false" labelForId="{{data.DictionaryAttributeParent.Name}}"
+    [typeahead]="lookupInput"></ng-select>
 
   <!-- <small [hidden]="formcontr.valid || input.pristine" class="text-danger">{{data.name}} is bad!</small>
      -->
 </div>
 
-<pre>{{data.value | json}}
+<pre>{{data.Value | json}}
 
   </pre>
 

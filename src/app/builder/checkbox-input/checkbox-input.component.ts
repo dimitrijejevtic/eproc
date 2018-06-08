@@ -13,13 +13,15 @@ export class CheckboxInputComponent implements OnInit, OnDestroy, BuilderCompone
 
   form: FormGroup;
   data: CheckboxInput;
-  constructor(private resolver: PropertyResolver<CheckboxInput>) { }
+  constructor(private resolver: PropertyResolver<CheckboxInput>) {
+ }
 
   ngOnInit() {
+
   }
   ngOnDestroy(): void {
   }
   onInputChange(event) {
-      this.data.value = this.form.get(this.data.name).value;
+      this.data.Value = this.form.get(this.data.DictionaryAttributeParent.Name).value;
   }
 }

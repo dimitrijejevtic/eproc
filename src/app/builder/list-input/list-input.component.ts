@@ -3,11 +3,11 @@ import { ListInput } from '../../m-models/attributes/list-input';
 import { PropertyResolver } from '../../m-resolvers/property-resolver';
 import { BuilderComponent } from '../../m-interfaces/builder-component';
 import { FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalContentComponent } from '../../modal/modal-content/modal-content.component';
 import { ObjectInstanceService } from '../../services/object-instance.service';
 import { ObjectInstance } from '../../m-models/object-instance';
 import { Extensions } from '../../utils/extensions';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'list-input',
@@ -21,7 +21,7 @@ export class ListInputComponent implements OnInit, OnDestroy, BuilderComponent<L
   ngxData = [];
   ngOnDestroy(): void {
   }
-  constructor(private resolver: PropertyResolver<ListInput>, private modalService: NgbModal) {
+  constructor(private resolver: PropertyResolver<ListInput>, private modalService: BsModalService) {
 
   }
 
@@ -30,14 +30,16 @@ export class ListInputComponent implements OnInit, OnDestroy, BuilderComponent<L
     this.ngxData = this.data.getNgxData();
   }
   addItem() {
-    const modal = this.modalService.open(ModalContentComponent, { size: 'lg' });
-    modal.componentInstance.instance = this.data.value[0];
-    modal.result.then((result) => {
+    const initState = {passtrough: this.data.Value[0]};
+
+    const modal = this.modalService.show(ModalContentComponent, {class: 'modal-lg', initialState: initState});
+
+    modal.content.onHide.subscribe((result) => {
       console.log('caught result');
       console.log(result);
       if (result !== null) {
         console.log('res not nul');
-        this.data.value.push(result);
+        this.data.Value.push(result);
         const newrows = Extensions.getNgxData([result], this.data.columnDefinition);
         console.log(newrows);
         this.ngxData = this.ngxData.concat(newrows);

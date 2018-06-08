@@ -1,51 +1,40 @@
 import { PropertyField } from '../m-interfaces/property-field';
 import { TypeNamed } from '../m-interfaces/type-named';
-import { Section } from './section';
+import { Guid } from '../utils/guid';
+import { Step } from './step';
+import { Extensions } from '../utils/extensions';
+import { PropertyCollection } from './property-collection';
 
 // TODO simplify classes
 export class ObjectInstance implements TypeNamed {
 
+  name: string;
   typeName = 'ObjectInstance';
-  sections: Section[];
+  id: number;
   private _values: PropertyCollection<PropertyField> = new PropertyCollection<PropertyField>();
 
-  private _id: number;
-  public get id(): number {
-    return this._id;
+  private _guid: string;
+  public get guid(): string {
+    return this._guid;
   }
 
   constructor() {
-    this._id = Math.round(Math.random() * 10000);
-    this.sections = [];
+    this._guid = Guid.newGuid();
   }
 
-  public getValue() {
-    const res = new Object(null);
-    this.sections.forEach(el => {
-      res[el.name] = el.toAssociative();
+  initFromStep(step: Step) {
+    this.name = step.CaptionKey;
+    this.id = step.Id;
+    const props = Extensions.getStepProperties(step);
+    props.forEach(prop => {
+      this.setPropertyValue(prop.DictionaryAttributeParent.Name, {});
     });
-    return res;
   }
-  getInnerProperties(): PropertyField[] {
-    const ar = [];
-    this.sections.forEach(el => {
-      el.getValues().forEach(element => {
-        ar.push(element);
-      });
-    });
-    return ar;
-  }
-  getPropertyByName(name: string): PropertyField {
-    let field = null;
-    this.sections.forEach(sec => {
-      const smt = sec.getValue(name);
-      if (smt !== null) {
-        field = smt;
-        return;
-      }
-    });
-    return field;
 
+  public getPropertyByName(name: string): PropertyField {
+    if (this.exists(name))
+      return this._values.get(name);
+    else return null;
   }
   public exists(key: string): boolean {
     if (key !== null && key !== '') {
@@ -54,15 +43,15 @@ export class ObjectInstance implements TypeNamed {
     return false;
   }
 
-  public setValue(key: string, value: any): void {
+  public setPropertyValue(key: string, value: any): void {
     this._values.set(key, value);
   }
 
-  public removeValue(key: string) {
+  public removeProperty(key: string) {
     if (this.exists(key))
       this._values.deletePair(key);
   }
-  public getValues() {
+  public getValues(): Map<string, PropertyField> {
     if (this._values !== null)
       return this._values.getValue();
     return null;
@@ -72,8 +61,13 @@ export class ObjectInstance implements TypeNamed {
   }
   public toAssociative() {
     const json = Object.create(null);
+    json['Id'] = this.id;
+    json['Guid'] = this.guid;
+    json['TypeName'] = this.typeName;
+    json['Name'] = this.name;
+    json['Fields'] = [];
     this._values.getValue().forEach((value, key) => {
-      json[key] = value;
+      json['Fields'].push({'Name': key, 'Value': value.Value, 'DataType': 'Attribute' });
     });
   return json;
   }
@@ -81,27 +75,3 @@ export class ObjectInstance implements TypeNamed {
 }
 
 
-export class PropertyCollection<T>  {
-  private _propertys: Map<string, T> = new Map<string, T>();
-
-  public get length(): number {
-    return this._propertys.size;
-  }
-  public get(key: string): T {
-    return this._propertys.get(key);
-  }
-  public set(key: string, value: T): void {
-    this._propertys.set(key, value);
-  }
-  public deletePair(key: string): void {
-    this._propertys.delete(key);
-  }
-  public getValue() {
-    return this._propertys;
-  }
-}
-
-export class ListColumnDisplay {
-  name: string;
-  type: string;
-}

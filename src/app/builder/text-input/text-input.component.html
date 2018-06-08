@@ -1,16 +1,15 @@
 
-<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
-  <label for="{{data.name}}" class="">
-    {{data.caption}}
+<div class="form-group"  [formGroup]="form" *ngIf="data.isVisible">
+  <label for="{{data.DictionaryAttributeParent}}" class="">
+    {{data.DictionaryAttributeParent.CaptionKey}} - {{data.DictionaryAttributeParent.Id}}
   </label>
-  <input type="{{data.toHtmlType()}}" class="form-control" id="{{data.name}}"
-  required  placeholder="{{data.name}}"
+  <input type="{{data.toHtmlType()}}" class="form-control" id="{{data.DictionaryAttributeParent}}"
+   placeholder="{{data.DictionaryAttributeParent.Name}}"
   [step]="data.getStep()"
-  [pattern]="data.expressionValidation"
-  [formControlName]="data.name" (keyup)="onInputChange($event)">
+  [formControlName]="data.DictionaryAttributeParent.Name" (keyup)="onInputChange($event)" >
   <!-- <small [hidden]="formcontr.valid || input.pristine" class="text-danger">{{data.name}} is bad!</small>
-   --></div>
+   -->
+  </div>
 
-<pre>{{data.value | json}}
-
+<pre>{{data.Value | json}}
 </pre>

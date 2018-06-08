@@ -1,0 +1,14 @@
+#ang-sidebar{
+  background-color: rgb(39, 39, 39);
+  padding-bottom: 9999px;
+  margin-bottom: -9999px;
+  overflow: hidden;
+}
+#step-nav{
+  min-height: 84vh;
+
+}
+.no-float {
+  display:table-cell;
+  float:none;
+}

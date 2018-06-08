@@ -7,6 +7,11 @@ import { FormGroup } from '@angular/forms';
 import { BuilderComponent } from '../../m-interfaces/builder-component';
 import { ObjectInstanceService } from '../../services/object-instance.service';
 import { ObjectInstance } from '../../m-models/object-instance';
+import { AttributeToPropertyField } from '../../m-resolvers/attribute-to-propertyfield';
+import { PropertyField } from '../../m-interfaces/property-field';
+import { TextInput } from '../../m-models/attributes/text-input';
+import { DictionaryAttribute } from '../../m-models/dictionary-attribute';
+import { FormServiceService } from '../../services/form-service.service';
 
 @Component({
   selector: 'app-section',
@@ -17,31 +22,32 @@ import { ObjectInstance } from '../../m-models/object-instance';
 export class SectionComponent implements OnInit {
 
   @Input() section: Section;
-  @Input() form: FormGroup;
+  form: FormGroup;
   @ViewChild(StepContentTargetDirective) contentTarget: StepContentTargetDirective;
 
-  constructor(private componentResolver: ComponentFactoryResolver) { }
+  constructor(private componentResolver: ComponentFactoryResolver, private formService: FormServiceService) { }
 
   ngOnInit() {
+    this.formService.activeForm.subscribe(f => this.form = f);
     const target = this.contentTarget.viewContainerRef;
-    let vals = null;
-    if (!environment.production) {
-      // vals = this.section.getValues();
-      vals  = this.section.getValues();
-    }
+    let vals: PropertyField[] = null;
+
+    vals = AttributeToPropertyField.Resolve(this.section.DictionaryDataUnitParent.DicionaryAttributInDataUnitChildren);
 
     if (this.section !== null) {
-      if (vals !== null)
-      console.log(vals);
-        vals.forEach(element => {
-          const tp = element.getType();
+      if (vals !== undefined && vals !== null && vals.length > 0) {
+        for (let i = 0; i < vals.length; i++) {
+          const tp = vals[i].getType();
           const resolver = new PropertyResolver<typeof tp>();
-          const c = resolver.getComponent(this.componentResolver, element);
+          const c = resolver.getComponent(this.componentResolver, vals[i]);
           const cd = target.createComponent(c);
-          (<BuilderComponent<any>>cd.instance).data = element;
+          (<BuilderComponent<any>>cd.instance).data = vals[i];
           (<BuilderComponent<any>>cd.instance).form = this.form;
+        }
+        vals.forEach((element: PropertyField) => {
+
         });
+      }
     }
   }
-
 }

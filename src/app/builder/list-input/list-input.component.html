@@ -1,5 +1,5 @@
 
-<div [formGroup]="form" class="form-group" *ngIf="data.expressionVisibility">
+<div [formGroup]="form" class="form-group" >
   <button class="btn btn-default" (click)="addItem()">Add</button>
   <ngx-datatable [rows]="ngxData" [columns]="data.columnDefinition" >
   </ngx-datatable>

@@ -17,7 +17,7 @@ export class DatetimepickerComponent implements OnInit, BuilderComponent<Datetim
   ngOnInit() {
   }
   onInputChange(event) {
-    this.data.value = event.value;
-   this.form.get(this.data.name).setValue(this.data.value);
+   this.data.Value = event;
+   this.form.get(this.data.DictionaryAttributeParent.Name).setValue(this.data.Value);
   }
 }

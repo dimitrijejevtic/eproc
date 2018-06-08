@@ -1,25 +1,28 @@
-<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
-  <label for="{{data.name}}" class="">
-    {{data.caption}}
+<div class="form-group"  [formGroup]="form">
+  <label for="{{data.DictionaryAttributeParent.Name}}" class="">
+    {{data.DictionaryAttributeParent.CaptionKey}}
   </label>
   <div class="input-group">
-    <input type="text" [formControlName]="data.name" class="form-control" readonly="true">
-    <div class="input-group-append">
-      <div ngbDropdown [placement]="'bottom-right'" [autoClose]="false">
-        <button class="btn btn-outline-secondary" id="{{data.name}}" type="button" ngbDropdownToggle [disabled]="data.expressionReadOnly">
+    <input type="text" [formControlName]="data.DictionaryAttributeParent.Name" class="form-control" readonly="true">
+    <div class="input-group-btn">
+      <ngx-datetime-picker (selectedDateTimeChange)="onInputChange($event)"></ngx-datetime-picker>
+
+        <!-- <button class="btn btn-outline-secondary" id="{{data.DictionaryAttributeParent.Name}}" type="button" dropdownToggle [disabled]="data.ExpressionReadOnly"
+        attr.aria-controls="dropdown-date">
           <span class="oi oi-calendar"></span>
-        </button>
-        <div ngbDropdownMenu attr.aria-labelledby="{{data.name}}">
+        </button> -->
+        <!-- <div id="dropdown-date" #dropdownMenu attr.aria-labelledby="{{data.DictionaryAttributeParent.Name}}" role="menu">
           <div style="min-width: 300px;">
-            <dl-date-time-picker (change)="onInputChange($event)" ></dl-date-time-picker>
+            library to be implemented
+
           </div>
-        </div>
-      </div>
+        </div> -->
+
     </div>
   </div>
 
 </div>
 <pre>
-  {{ data.value | json}}
+  {{ data.Value | json}}
 </pre>
 

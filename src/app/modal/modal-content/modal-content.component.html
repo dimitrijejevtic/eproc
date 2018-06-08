@@ -1,14 +1,14 @@
 <div class="modal-header">
-  <h4 class="modal-title">Modal title</h4>
-  <button class="close" type="button" aria-label="Close" (click)="activeModal.close(null)">
+  <h4 class="modal-title pull-left">Modal title</h4>
+  <button class="close pull-right" type="button" aria-label="Close" (click)="closeModal('times')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <app-form [listInstance]="instance" (outInstance)="returningInstance($event)" ></app-form>
+  <!-- <app-form [listInstance]="instance" (outInstance)="returningInstance($event)" ></app-form> -->
 </div>
 <div class="modal-footer">
-  <button type="submit" class="btn btn-default" (click)="activeModal.close(instance)">Submit</button>
-  <button class="btn btn-light" type="button" (click)="activeModal.close(null)">Close</button>
+  <button type="submit" class="btn btn-default" (click)="closeModal(instance)">Submit</button>
+  <button class="btn btn-light" type="button" (click)="closeModal('close')">Close</button>
 </div>
 

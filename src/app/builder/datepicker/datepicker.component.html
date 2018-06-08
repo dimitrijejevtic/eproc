@@ -1,8 +1,8 @@
-<div class="form-group" [formGroup]="form" *ngIf="data.expressionVisibility">
+<div class="form-group" [formGroup]="form">
   <div class="input-group">
     <input class="form-control" placeholder="dd/mm/yyyy"
-    name="data.name" ngbDatepicker #d="ngbDatepicker" [formControlName]="data.name">
-    <div class="input-group-append">
+    name="data.DictionaryAttributeParent.Name" bsDatepicker #d="bsDatepicker" [formControlName]="data.DictionaryAttributeParent.Name" [bsConfig]="config">
+    <div class="input-group-btn">
       <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
         <span class="oi oi-calendar"></span>
         <span class="oi oi-chevron-bottom"></span>

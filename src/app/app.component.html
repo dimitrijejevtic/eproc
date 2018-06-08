@@ -1,24 +1,22 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow col-sm-3 col-md-2">
-  <a href="#" class="navbar-brand col-sm-3 col-md-2 mr-0">Brand</a>
-  <!-- <a href="#" class="navbar-text col-sm-1 col-md-2 mr-0">Step name</a>
-  <div class="w-100"></div>
-  <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-  </li>
-  </ul> -->
-</nav>
-<div class="container-fluid" style="margin-top:-40px;">
-  <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-dark sidebar collapse show" id="drawer">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <left-drawer></left-drawer>
-            </ul>
-          </div>
-      </nav>
-      <main class="col-md-10 ml-sm-auto col-lg-10 p-0" role="main">
-         <work-area></work-area>
-      </main>
+<div class="row">
+  <div class=" col-sm-2 col-md-2 col-lg-2 col-xs-2 " id="ang-sidebar">
+    <div class="row" id="step-nav" style="min-height: 84vh;">
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <ul class="nav" style="padding-top:14px;">
+         <left-drawer></left-drawer>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-10 col-sm-10 col-lg-10 col-xs-10" role="main" style="overflow:hidden;">
+    <div class="">
+      <!-- <button type="button" class="closed hidden-lg hidden-md" data-toggle="offcanvas">
+        <span class="oi oi-menu"></span>
+      </button> -->
+      <div class="row">
+        <work-area></work-area>
+      </div>
+    </div>
   </div>
 </div>
 

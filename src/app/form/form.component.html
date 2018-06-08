@@ -3,22 +3,23 @@
 <form (ngSubmit)="onSubmit()" #stepForm="ngForm" [formGroup]="form">
   <fieldset>
     <div *ngIf="step!==null">
-      <div class="form-section" *ngFor="let section of step.sections">
-        <app-section [section]="section" [form]="form"></app-section>
+      <div class="form-section" *ngFor="let section of step.WizardStepSectionChildren">
+        <app-section [section]="section" ></app-section>
       </div>
     </div>
-    <div *ngIf="step === null">
+    <!-- <div *ngIf="step === null">
       <div class="form-section" *ngFor="let section of instance.sections">
         <app-section [section]="section" [form]="form"></app-section>
       </div>
-    </div>
+    </div> -->
   </fieldset>
-  <div *ngIf="!isInner">
+  <div *ngIf="isInner">
     <button type="submit" class="btn btn-success" [disabled]="!stepForm.form.valid">Submit</button>
     <button type="button" class="btn btn-default">Validate</button>
     <button type="button" class="btn btn-default" (click)="saveInstance()">Test save</button>
   </div>
 </form>
+
 <pre class="alert alert-dark">{{form.getRawValue() | json}}
-  {{instance.getValue() | json}}</pre>
+  <!-- {{instance.getValue() | json}} --></pre>
 

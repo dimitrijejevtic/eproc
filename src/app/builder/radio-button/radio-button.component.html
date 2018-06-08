@@ -1,16 +1,36 @@
-<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
-  <div class="form-check">
-    <label for="{{data.name+'_true'}}" class="form-check-label">
-      <input [formControlName]="data.name" type="radio" class="form-check-input"
-      name="{{data.name}}" id="{{data.name+'_true'}}" value="true" > Yes
-    </label>
+<div class="form-group" [formGroup]="form" >
+  <div *ngIf="data.DictionaryAttributeParent.ControlType=='yesnoradio'">
+    <div class="form-check">
+      <span>{{data.DictionaryAttributeParent.CaptionKey}}</span>
+      <br>
+      <label for="{{data.DictionaryAttributeParent.Name+'_true'}}" class="form-check-label">
+        <input [formControlName]="data.DictionaryAttributeParent.Name" type="radio" class="form-check-input" name="{{data.DictionaryAttributeParent.Name}}"
+          id="{{data.DictionaryAttributeParent.Name+'_true'}}" value="true"> Yes
+      </label>
     </div>
     <div class="form-check">
-    <label for="{{data.name+'_false'}}" class="form-check-label">
-      <input [formControlName]="data.name" type="radio" class="form-check-input"
-      name="{{data.name}}" id="{{data.name+'_false'}}" value="false" > No
-    </label>
+      <label for="{{data.DictionaryAttributeParent.Name+'_false'}}" class="form-check-label">
+        <input [formControlName]="data.DictionaryAttributeParent.Name" type="radio" class="form-check-input" name="{{data.DictionaryAttributeParent.Name}}"
+          id="{{data.DictionaryAttributeParent.Name+'_false'}}" value="false"> No
+      </label>
+    </div>
+  </div>
+  <div *ngIf="data.DictionaryAttributeParent.ControlType=='noyesradio'">
+    <div class="form-check">
+      <span>{{data.DictionaryAttributeParent.CaptionKey}}</span>
+      <br>
+      <label for="{{data.DictionaryAttributeParent.Name+'_false'}}" class="form-check-label">
+        <input [formControlName]="data.DictionaryAttributeParent.Name" type="radio" class="form-check-input" name="{{data.DictionaryAttributeParent.Name}}"
+          id="{{data.DictionaryAttributeParent.Name+'_false'}}" value="false"> No
+      </label>
+    </div>
+    <div class="form-check">
+      <label for="{{data.DictionaryAttributeParent.Name+'_true'}}" class="form-check-label">
+        <input [formControlName]="data.DictionaryAttributeParent.Name" type="radio" class="form-check-input" name="{{data.DictionaryAttributeParent.Name}}"
+          id="{{data.DictionaryAttributeParent.Name+'_true'}}" value="true"> Yes
+      </label>
+    </div>
   </div>
 </div>
-<pre>{{data.value | json}}</pre>
+<pre>{{data.Value | json}}</pre>
 

@@ -3,6 +3,8 @@ import { ObjectInstance } from '../m-models/object-instance';
 import { HttpClient } from '@angular/common/http';
 import { PropertyRule } from '../m-models/property-rule';
 import { UrlResolver } from '../m-resolvers/url-resolver';
+import { catchError } from 'rxjs/operators';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class ObjectInstanceService extends UrlResolver<ObjectInstance> {
 
   private instances: ObjectInstance[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private errorService: ErrorService) {
     super(ObjectInstance);
     this.instances = [];
   }
@@ -24,7 +26,6 @@ export class ObjectInstanceService extends UrlResolver<ObjectInstance> {
 
   public find(id: number): ObjectInstance {
     let ins = null;
-    console.log(this.instances);
     if (this.instances !== null) {
       this.instances.forEach(instance => {
         if (id === instance.id)
@@ -40,9 +41,6 @@ export class ObjectInstanceService extends UrlResolver<ObjectInstance> {
       exist = objectInstance;
     else
       this.instances.push(objectInstance);
-
-    console.log('changed data: ');
-    console.log(this.instances);
   }
 
   public removeById(id: number) {
@@ -52,25 +50,54 @@ export class ObjectInstanceService extends UrlResolver<ObjectInstance> {
       this.instances = this.instances.splice(ind, 1);
     }
   }
-  public saveById(id: number) {
-    const inst = this.find(id);
-    if (inst !== null)
-      this.http.post('rooturl', inst)
+  /**
+   * http method
+   * @param id id of objectInstance from service store
+   */
+  public saveById(id: number, instance?: ObjectInstance) {
+
+    if (instance === null)
+     instance = this.find(id);
+
+    if (instance !== null)
+      this.http.post('rooturl', instance)
       .subscribe(() => {
         this.removeById(id);
       });
   }
+  public validate(id: number, instance: ObjectInstance) {
+    console.log(instance.toAssociative());
+    return this.http.post<PropertyRule[]>('expressionvalidation', instance.toAssociative())
+    .pipe(catchError(this.errorService.handleError('expressionvalidation')));
+  }
+
   applyConditions(id: number, rules: PropertyRule[]) {
     const instance = this.find(id);
     rules.forEach(rule => {
-      const prop = instance.getPropertyByName(rule.name);
-      prop.expressionReadOnly = rule.expressionReadOnly;
-      prop.expressionVisibility = rule.expressionVisibility;
+      const prop = instance.getPropertyByName(rule.Name);
+      prop.IsReadOnly = rule.IsReadOnly;
+      prop.isVisible = rule.IsVisible;
 
-      if (rule.value !== null) {
-        prop.value = rule.value;
+      if (rule.Value !== null) {
+        prop.Value = rule.Value;
       }
     });
+  }
 
+  getPropertyOfInstance(instanceId: number, name: string) {
+    const oi = this.find(instanceId);
+    if (oi !== null)
+      return oi.getPropertyByName(name);
+    return null;
+  }
+  setPropertyOfInstance(instanceId: number, name: string, value: any) {
+    const oi = this.find(instanceId);
+    if (oi !== null)
+      oi.setPropertyValue(name, value);
+  }
+  removePropertyOfInstance(instanceId: number, name: string) {
+    const oi = this.find(instanceId);
+    if (oi !== null)
+      oi.removeProperty(name);
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ModalContentComponent } from '../modal-content/modal-content.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-modal',
@@ -9,12 +10,11 @@ import { ModalContentComponent } from '../modal-content/modal-content.component'
 })
 export class ModalComponent  {
 
-
   closeResult: string;
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: BsModalService) { }
 
   open() {
-    const modal = this.modalService.open(ModalContentComponent, {size: 'lg'});
+    const modal = this.modalService.show(ModalContentComponent, {class: 'modal-lg'});
    // modal.componentInstance.instance = this.instance;
   }
 

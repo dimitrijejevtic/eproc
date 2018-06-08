@@ -10,6 +10,9 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor(private router: Router) {
   }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    // TODO: enable interception
+    console.log(req.headers.get('No-Auth'));
     if (req.headers.get('No-Auth') === 'True') {
       return next.handle(req.clone());
     }

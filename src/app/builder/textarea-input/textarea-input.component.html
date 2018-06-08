@@ -1,7 +1,7 @@
-<div class="form-group" *ngIf="data.expressionVisibility" [formGroup]="form">
-  <label for="{{data.name}}" class="">{{data.caption}}</label>
-  <textarea [formControlName]="data.name" class="form-control" id="{{data.name}}" required (keyup)="onInputChange($event)"></textarea>
+<div class="form-group"  [formGroup]="form">
+  <label for="{{data.DictionaryAttributeParent.Name}}" class="">{{data.DictionaryAttributeParent.CaptionKey}}</label>
+  <textarea [formControlName]="data.DictionaryAttributeParent.Name" class="form-control" id="{{data.DictionaryAttributeParent.Name}}" required (keyup)="onInputChange($event)"></textarea>
 </div>
 <pre>
-    {{data.value | json}}
+    {{data.Value | json}}
 </pre>

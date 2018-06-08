@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/@ng-select/ng-select/themes/default.theme.css";
 @import "../node_modules/open-iconic/font/css/open-iconic-bootstrap.css";
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css";
+@import "../node_modules/ngx-datetime-picker/ngx-datetime-picker.css";
 
 .sidebar{
   position: fixed;
@@ -27,3 +29,6 @@ ng-select.ng-valid[required] .ng-select-container, ng-select.ng-valid.required .
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
 }
 .modal { overflow: auto !important; }
+pre {
+  background-color: lightgray;
+}

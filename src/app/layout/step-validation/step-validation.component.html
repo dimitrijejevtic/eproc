@@ -1,0 +1,4 @@
+<span *ngIf="step.isLoadingValidation" class="oi oi-reload "></span>
+<span *ngIf="step.isValidated && step.isValid && !step.isLoadingValidation" class="oi oi-check "></span>
+<span *ngIf="!step.isValidated && !step.isLoadingValidation" class="oi oi-question-mark "></span>
+<span *ngIf="step.isValidated && !step.isValid && !step.isLoadingValidation" class="oi oi-x "></span>
