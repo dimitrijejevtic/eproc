@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="form">
+<div class="form-group" [formGroup]="form" [hidden]="!data.isVisible">
   <div class="input-group">
     <input class="form-control" placeholder="dd/mm/yyyy"
     name="data.DictionaryAttributeParent.Name" bsDatepicker #d="bsDatepicker" [formControlName]="data.DictionaryAttributeParent.Name" [bsConfig]="config">

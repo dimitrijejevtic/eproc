@@ -10,20 +10,20 @@ export class UrlResolver<T extends TypeNamed> {
   }
   public getUrl(): string {
     let url = '';
-    url = url.concat(Constants.rootUrl, Constants.apiUrl, this.typename);
+    url = url.concat(Constants.protocol, Constants.rootUrl, Constants.apiUrl, this.typename);
     return url;
   }
   public getUrlWithFilter(params: any): string {
     let url = '';
-    url = url.concat(Constants.rootUrl, Constants.apiUrl, this.typename, Constants.parameterStart, JSON.stringify(params));
+    url = url.concat(Constants.protocol, Constants.rootUrl, Constants.apiUrl, this.typename, Constants.parameterStart, JSON.stringify(params));
     return url;
   }
   public getCommandUrl(command: string) {
-    const url = ''.concat(Constants.rootUrl, Constants.apiUrl, 'command/', command);
+    const url = ''.concat(Constants.protocol, Constants.rootUrl, Constants.apiUrl, 'command/', command);
     return url;
   }
   getQueryUrl(command: string) {
-    const url = ''.concat(Constants.rootUrl, Constants.apiUrl, 'query/', command);
+    const url = ''.concat(Constants.protocol, Constants.rootUrl, Constants.apiUrl, 'query/', command);
     return url;
   }
 }

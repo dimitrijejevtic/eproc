@@ -5,6 +5,13 @@
 export const environment = {
   production: false
 };
+export const envglobals = {
+  rootUrl: 'localhost:5026/',
+  apiUrl: 'api/',
+  protocol: 'http://',
+  parameterStart: '?',
+  parameterAppend: '&'
+};
 
 /*
  * In development mode, to ignore zone related error stack frames such as

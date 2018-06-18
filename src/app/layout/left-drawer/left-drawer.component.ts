@@ -35,7 +35,7 @@ export class LeftDrawerComponent implements OnInit, OnDestroy {
     }
 
     this.wizardId = id;
-    this.stepService.dynSteps.subscribe(st => { this.localSteps = st; this.initInstances(); this.navigationService.setSteps(st); });
+    this.stepService.dynSteps.subscribe(st => { this.localSteps = st; this.initInstances(); this.navigationService.setSteps(st); this.navigateToFirst(); });
     this.stepService.getAllSteps(this.wizardId).subscribe(s => console.log('loaded drawer') );
 
     this.router.navigateByUrl('');
@@ -57,6 +57,13 @@ export class LeftDrawerComponent implements OnInit, OnDestroy {
   }
   navigate(stepId: number) {
     this.navigationService.navigateTo(stepId);
+  }
+  navigateToFirst() {
+    if (this.localSteps[0] === undefined || this.localSteps[0] === null)
+      return;
+    console.log(this.localSteps);
+
+    this.router.navigateByUrl('/step/' + this.localSteps[0].Id);
   }
 
 }

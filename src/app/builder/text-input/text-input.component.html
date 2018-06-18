@@ -1,15 +1,15 @@
 
-<div class="form-group"  [formGroup]="form" *ngIf="data.isVisible">
+<div class="form-group"  [formGroup]="form" [hidden]="!data.isVisible">
   <label for="{{data.DictionaryAttributeParent}}" class="">
-    {{data.DictionaryAttributeParent.CaptionKey}} - {{data.DictionaryAttributeParent.Id}}
+    {{data.DictionaryAttributeParent.CaptionKey}}
   </label>
   <input type="{{data.toHtmlType()}}" class="form-control" id="{{data.DictionaryAttributeParent}}"
    placeholder="{{data.DictionaryAttributeParent.Name}}"
   [step]="data.getStep()"
-  [formControlName]="data.DictionaryAttributeParent.Name" (keyup)="onInputChange($event)" >
+  [formControlName]="data.DictionaryAttributeParent.Name" (keyup)="onInputChange($event)"  >
   <!-- <small [hidden]="formcontr.valid || input.pristine" class="text-danger">{{data.name}} is bad!</small>
    -->
   </div>
 
-<pre>{{data.Value | json}}
-</pre>
+<!-- <pre>{{data.Value | json}}
+</pre> -->

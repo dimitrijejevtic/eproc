@@ -7,7 +7,7 @@
     <ul class="navbar-nav px-3 pull-right" style="padding:3px;">
       <li class="nav-item text-nowrap">
           <app-step-validation [step]="localStep" style="color:white;"></app-step-validation>
-          <button type="button" (click)="testApplycConditions()" class="btn btn-default">Test validation</button>
+          <!-- <button type="button" (click)="testApplycConditions()" class="btn btn-default">Test validation</button> -->
         <button type="button" class="btn btn-default m-1" (click)="validate()">Validate</button>
         <button type="button" class="btn btn-success m-1" [disabled]="!isSavable">Save</button>
       </li>
@@ -20,8 +20,10 @@
     </div>
   </div>
   <div class="col-md-12 col-sm-12 col-xl-12 col-lg-12">
-    <button type="button" class="btn btn-default m-1" [disabled]="localStep.previousStepId === undefined || localStep.previousStepId === null" (click)="navigatePrevious()">Previous step</button>
-    <button type="button" class="btn btn-default m-1" [disabled]="localStep.nextStepId === undefined || localStep.nextStepId === null" (click)="navigateNext()">Next step</button>
+    <button type="button" class="btn btn-default m-1" [disabled]="!localStep.isValid || !localStep.isValidated" (click)="navigatePrevious()"
+    [hidden]="localStep.previousStepId === undefined || localStep.previousStepId === null">Previous step</button>
+    <button type="button" class="btn btn-default m-1" [disabled]="!localStep.isValid || !localStep.isValidated" (click)="navigateNext()"
+    [hidden]="localStep.nextStepId === undefined || localStep.nextStepId === null">Next step</button>
     <div class="pull-right">
       <div *ngFor="let msg of localStep.validationMessages">
         <app-form-alert [alertMessage]="msg"></app-form-alert>

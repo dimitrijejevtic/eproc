@@ -14,7 +14,7 @@ export class SearchService {
     let options = {};
     if (term !== undefined && term !== null && term !== '' )
       options = { params: new HttpParams().set('SearchTerm', '' + term) };
-    return this.http.get<any[]>(''.concat(Constants.rootUrl, Constants.apiUrl, 'search/', '' + domainDataSourceId), options);
+    return this.http.get<any[]>(''.concat(Constants.protocol, Constants.rootUrl, Constants.apiUrl, 'search/', '' + domainDataSourceId), options);
   }
 
 }

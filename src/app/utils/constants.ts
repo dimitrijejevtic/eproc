@@ -1,8 +1,18 @@
+import { Global } from './config-globals';
+
 export class Constants {
-  // TODO: define root url
-  static readonly rootUrl: string = 'http://localhost:5026/';
-  static readonly apiUrl: string = 'api/';
-  static readonly parameterStart: string = '?';
-  static readonly parameterAppend: string = '&';
+  static rootUrl: string;
+  static apiUrl: string;
+  static protocol: string;
+  static parameterStart: string;
+  static parameterAppend: string;
+
+  public static init(config: Global) {
+    Constants.rootUrl = config.rootUrl;
+    Constants.protocol = config.protocol;
+    Constants.apiUrl = config.apiUrl;
+    Constants.parameterStart = '?';
+    Constants.parameterAppend = '&';
+  }
 }
 

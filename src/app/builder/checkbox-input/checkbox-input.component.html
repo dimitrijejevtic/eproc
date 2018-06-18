@@ -1,12 +1,11 @@
-<div class="form-check"  [formGroup]="form">
+<div class="form-check"  [formGroup]="form" [hidden]="!data.isVisible">
   <label class="form-check-label">
-    <input class="form-check-input" type="checkbox" id="{{data.DictionaryAttributeParent.Name}}"
+    <input class="form-check-input checkbox-shadow" type="checkbox" id="{{data.DictionaryAttributeParent.Name}}"
     placeholder="{{data.DictionaryAttributeParent.Name}}" [formControlName]="data.DictionaryAttributeParent.Name">
-
     {{data.DictionaryAttributeParent.CaptionKey}}
   </label>
 </div>
-<pre>{{data.Value | json}}
+<!-- <pre>{{data.Value | json}}
 
-</pre>
+</pre> -->
 

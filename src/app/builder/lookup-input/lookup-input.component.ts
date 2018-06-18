@@ -7,6 +7,7 @@ import { from, of, Subject, concat } from 'rxjs';
 import { finalize, delay, debounceTime, distinctUntilChanged, switchMap, catchError, tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { SearchService } from '../../services/search.service';
+import { StepValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'app-lookup-input',
@@ -21,7 +22,7 @@ export class LookupInputComponent implements OnInit, BuilderComponent<LookupInpu
   loading = false;
   lookupInput = new Subject<string>();
   dataSourceId: number;
-  constructor(private http: HttpClient, private searchService: SearchService) { }
+  constructor(private http: HttpClient, private searchService: SearchService, private validationService: StepValidationService) { }
 
   ngOnInit() {
     this.dataSourceId = this.data.DictionaryAttributeParent.DomainDataSourceId;
@@ -34,6 +35,20 @@ export class LookupInputComponent implements OnInit, BuilderComponent<LookupInpu
         switchMap(term => this.getWithTerm(term))
       )
     );
+    this.validationService.validatingAttribute.subscribe(at => {
+      if (this.data.DictionaryAttributeId === at.DictionaryAttributeId) {
+        this.data.isValid = at.isValid;
+        this.data.isVisible = at.isVisible;
+        this.data.IsReadOnly = at.IsReadOnly;
+        if (at.IsReadOnly)
+          this.form.get(this.data.DictionaryAttributeParent.Name).disable();
+        if (!this.data.isValid)
+          this.form.get(this.data.DictionaryAttributeParent.Name).setErrors({'incorrect': true});
+
+        this.form.get(this.data.DictionaryAttributeParent.Name).markAsTouched();
+        this.form.get(this.data.DictionaryAttributeParent.Name).markAsDirty();
+      }
+    });
   }
   getWithTerm(term: string) {
     return this.searchService.getOptions(this.dataSourceId, term).pipe(

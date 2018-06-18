@@ -94,9 +94,12 @@ export class StepService extends UrlResolver<Step> {
     const ex = this.rawSteps.find(v => v.Id === step.Id);
 
     if (ex !== null && ex !== undefined) {
+
       ex.isLoadingValidation = step.isLoadingValidation;
       ex.isValid = step.isValid;
       ex.isValidated = step.isValidated;
+      ex.isVisible = step.isVisible;
+      ex.isDisabled = step.isDisabled;
       this.stepsChanged();
     }
   }

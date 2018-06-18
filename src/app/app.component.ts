@@ -8,6 +8,8 @@ import { switchMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { WizardService } from './services/wizard.service';
 import { NavigationService } from './services/navigation.service';
+import { Config, Global } from './utils/config-globals';
+import { GobalConfigService } from './services/gobal-config.service';
 
 @Component({
   selector: 'app-root',
@@ -16,10 +18,10 @@ import { NavigationService } from './services/navigation.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class AppComponent implements OnInit, OnDestroy {
-
-  constructor() {
+  constructor(private globConf: GobalConfigService ) {
   }
   ngOnInit(): void {
+
   }
   ngOnDestroy(): void {
     console.log('destroying');

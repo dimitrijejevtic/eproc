@@ -33,4 +33,24 @@ export class ErrorService {
       );
     };
   }
+  public handleNonRedirectError<T>(url = 'url', result?: T) {
+    return (error: any): Observable<T> => {
+      // console.log(error);
+      if (error.error instanceof ErrorEvent) {
+        console.error('An error occured', error.error.message);
+      } else {
+        console.error(
+          `Error status code ${error.status}, ` +
+          `body: ${error.error}`
+        );
+      }
+      this.toastrServ.sendAlert(error.error, 'error');
+      if (error.status === 500) {
+
+      }
+      return throwError(
+        'There was an error, try again later'
+      );
+    };
+  }
 }

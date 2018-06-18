@@ -67,8 +67,8 @@ export class ObjectInstanceService extends UrlResolver<ObjectInstance> {
   }
   public validate(id: number, instance: ObjectInstance) {
     console.log(instance.toAssociative());
-    return this.http.post<PropertyRule[]>(this.getCommandUrl('ExpressionEvaluateWizardStep'), instance.toAssociative())
-    .pipe(catchError(this.errorService.handleError('expressionvalidation')));
+    return this.http.post<PropertyRule[]>(this.getCommandUrl('ExpressionEvaluateWizardStep') + '?Tag=1', instance.toAssociative())
+    .pipe(catchError(this.errorService.handleNonRedirectError('expressionvalidation')));
   }
 
   applyConditions(id: number, rules: PropertyRule[]) {

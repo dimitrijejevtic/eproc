@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="form" >
+<div class="form-group" [formGroup]="form" [hidden]="!data.isVisible">
   <div *ngIf="data.DictionaryAttributeParent.ControlType=='yesnoradio'">
     <div class="form-check">
       <span>{{data.DictionaryAttributeParent.CaptionKey}}</span>
@@ -32,5 +32,5 @@
     </div>
   </div>
 </div>
-<pre>{{data.Value | json}}</pre>
+<!-- <pre>{{data.Value | json}}</pre> -->
 

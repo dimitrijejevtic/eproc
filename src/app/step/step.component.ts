@@ -98,13 +98,17 @@ export class StepComponent implements OnInit, OnDestroy {
     const r1 = new PropertyRule();
     r1.Id = 3;
     r1.IsValid = false;
+    r1.IsVisible = true;
     r1.TargetType = TargetType.Step;
     rules.push(r1);
 
     const r2 = new PropertyRule();
-    r2.Id = 20;
+    r2.Id = 70;
     r2.IsValid = false;
+    r2.IsVisible = true;
+    r2.IsReadOnly = true;
     r2.TargetType = TargetType.Attribute;
+
     rules.push(r2);
     this.applyConditions(rules);
   }

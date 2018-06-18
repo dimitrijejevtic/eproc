@@ -24,7 +24,7 @@ export class Step implements TypeNamed {
   Event_EntryEventId: number;
   Event_ExitEventId: number;
   IsNew: boolean;
-  IsReadOnly: false;
+  IsReadOnly: boolean;
   RelationshipNavigationEnabled: true;
   WizardParent: Wizard;
 

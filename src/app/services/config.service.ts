@@ -17,11 +17,17 @@ export class ConfigService {
     });
   }
   getConfiguration() {
-    return this.http.get(Constants.rootUrl + Constants.apiUrl + 'configuiration')
-      .toPromise()
-      .then(data => {
-        this.configurations = data; })
-      .catch(_ => console.log('server unavailable'));
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log(`config`);
+        resolve();
+      }, 10);
+    });
+    // return this.http.get(Constants.rootUrl + Constants.apiUrl + 'configuiration')
+    //   .toPromise()
+    //   .then(data => {
+    //     this.configurations = data; })
+    //   .catch(_ => console.log('server unavailable'));
 
   }
   public getConfig() {

@@ -19,3 +19,7 @@ a.disabled{
   cursor: not-allowed;
   text-decoration: underline;
 }
+.step-link-active{
+  background-color:gray;
+}
+

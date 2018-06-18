@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { finalize, catchError } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 import { of } from 'rxjs';
+import { StepValidationService } from '../../services/validation.service';
 
 @Component({
   selector: 'app-select-input',
@@ -17,11 +18,25 @@ export class SelectInputComponent implements OnInit, BuilderComponent<SelectInpu
   data: SelectInput;
   form: FormGroup;
   loading = true;
-  constructor(private searchServive: SearchService) { }
+  constructor(private searchServive: SearchService, private validationService: StepValidationService) { }
 
   ngOnInit() {
     this.data.Options = this.searchServive.getOptions(this.data.DictionaryAttributeParent.DomainDataSourceId)
       .pipe(finalize(() => this.loading = false));
+      this.validationService.validatingAttribute.subscribe(at => {
+        if (this.data.DictionaryAttributeId === at.DictionaryAttributeId) {
+          this.data.isValid = at.isValid;
+          this.data.isVisible = at.isVisible;
+          this.data.IsReadOnly = at.IsReadOnly;
+          if (at.IsReadOnly)
+            this.form.get(this.data.DictionaryAttributeParent.Name).disable();
+          if (!this.data.isValid)
+            this.form.get(this.data.DictionaryAttributeParent.Name).setErrors({'incorrect': true});
+
+          this.form.get(this.data.DictionaryAttributeParent.Name).markAsTouched();
+          this.form.get(this.data.DictionaryAttributeParent.Name).markAsDirty();
+        }
+      });
   }
   onInputChange(event) {
     this.data.Value = this.form.get(this.data.DictionaryAttributeParent.Name).value;

@@ -7,7 +7,6 @@ import { DictionaryAttribute } from '../dictionary-attribute';
 import { ListColumnDisplay } from '../property-collection';
 
 export class ListInput implements PropertyField {
-
   ExpressionValiationMessageKey: string;
   isValid: boolean;
   isVisible: boolean;

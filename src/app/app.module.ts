@@ -48,6 +48,7 @@ import { WizardService } from './services/wizard.service';
 import { ObjectInstanceService } from './services/object-instance.service';
 import { FormServiceService } from './services/form-service.service';
 import { StepValidationService } from './services/validation.service';
+import { GobalConfigService } from './services/gobal-config.service';
 
 const appInitializeFn = (configurations: ConfigService) => {
   return () => {
@@ -120,12 +121,14 @@ const appDelayInit = (configurations: ConfigService) => {
       provide: RouteReuseStrategy,
        useClass: CustomReuseStrategy
     },
+    GobalConfigService,
     WizardService,
     StepService,
     NavigationService,
     ObjectInstanceService,
     FormServiceService,
     StepValidationService
+
   ],
   bootstrap: [AppComponent],
   entryComponents: [TextInputComponent,

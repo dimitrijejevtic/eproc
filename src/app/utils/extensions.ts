@@ -42,6 +42,7 @@ export class Extensions {
       obj.isValid = rule.IsValid;
       obj.isVisible = rule.IsVisible;
       obj.isValidated = true;
+      obj.IsReadOnly = rule.IsReadOnly;
     }
     if (obj instanceof Section) {
 
@@ -49,6 +50,8 @@ export class Extensions {
     if (obj instanceof PropertyField) {
       obj.isValid = rule.IsValid;
       obj.isVisible = rule.IsVisible;
+      obj.IsReadOnly = rule.IsReadOnly;
+
       if (rule.Value !== undefined && rule.Value !== null) {
         obj.Value = rule.Value;
       }
