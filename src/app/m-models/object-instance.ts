@@ -65,6 +65,8 @@ export class ObjectInstance implements TypeNamed {
     json['Guid'] = this.guid;
     json['TypeName'] = this.typeName;
     json['Name'] = this.name;
+    json['ObjectId'] = this.id;
+    json['Tag'] = 1; // u pitanju je validacija, a ne provera ReadOnly, Mandatory i Visible
     json['Fields'] = [];
     this._values.getValue().forEach((value, key) => {
       json['Fields'].push({'Name': key, 'Value': value.Value, 'DataType': 'Attribute' });
